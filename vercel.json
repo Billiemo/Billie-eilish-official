@@ -1,0 +1,20 @@
+{
+  "redirects": [
+    {
+      "source": "/redirect",
+      "destination": "https://cleopatraadulatefrench.com/yrbajwpw4?key=c13dd6d2f97a5a0f967c85445d720bbb",
+      "permanent": false
+    }
+  ],
+  "headers": [
+    {
+      "source": "/redirect",
+      "headers": [
+        {
+          "key": "X-Frame-Options",
+          "value": "ALLOW-FROM https://www.facebook.com"
+        }
+      ]
+    }
+  ]
+}
